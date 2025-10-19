@@ -34,12 +34,12 @@
   - [x] 1.4 Create a new StudioGhibliService that uses the existing HttpService to handle Studio Ghibli API endpoints (https://ghibliapi.vercel.app/ - see Films documentation at https://ghibliapi.vercel.app/#tag/Films)
   - [x] 1.5 Add error handling for API failures and network issues
   - [x] 1.6 Write automated tests for GraphQL queries and ensure they pass
-- [ ] 2.0 Create the main page layout and film cards interface with responsive design for mobile
-  - [ ] 2.1 Create the main Home component with light blue sky background
-  - [ ] 2.2 Add primary header "Discover Studio Ghibli Films" and subheader "Select a film and hover to learn more"
-  - [ ] 2.3 Create interactive FilmCard component with specified colors (Totoro: #d79a68, Spirited Away: #c24646, Mononoke: #279094, Howl's: #3e6cac), white text titles, right arrow buttons, and event handlers for onClick and onHover
-  - [ ] 2.4 Implement responsive grid layout that reorganizes into single column on mobile (< 768px)
-  - [ ] 2.5 Ensure proper styling and spacing matches the design mockups
+- [x] 2.0 Create the main page layout and film cards interface with responsive design for mobile
+  - [x] 2.1 Create the main Home component with light blue sky background
+  - [x] 2.2 Add primary header "Discover Studio Ghibli Films" and subheader "Select a film and hover to learn more"
+  - [x] 2.3 Create interactive FilmCard component with specified colors (Totoro: #d79a68, Spirited Away: #c24646, Mononoke: #279094, Howl's: #3e6cac), white text titles, right arrow buttons, and event handlers for onClick and onHover
+  - [x] 2.4 Implement responsive grid layout that reorganizes into single column on mobile (< 768px)
+  - [x] 2.5 Ensure proper styling and spacing matches the design mockups
 - [ ] 3.0 Set up frontend GraphQL integration and data fetching
   - [ ] 3.1 Configure GraphQL Code Generator to generate typed hooks
   - [ ] 3.2 Create GraphQL queries for fetching film data by ID
