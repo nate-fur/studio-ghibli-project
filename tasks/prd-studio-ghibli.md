@@ -38,10 +38,10 @@ The Studio Ghibli Film Cards application is an interactive React web application
 2. **Film Selection Interface**
 
 - The system must display four film cards with solid colored backgrounds:
-  - My Neighbor Totoro (#d79a68 background)
-  - Spirited Away (#c24646 background)
-  - Princess Mononoke (#279094 background)
-  - Howl's Moving Castle (#3e6cac background)
+  - Porco Rosso (#d79a68 background)
+  - Kiki's Delivery Service (#c24646 background)
+  - Howl's Moving Castle (#279094 background)
+  - My Neighbor Totoro (#3e6cac background)
 - Each card must display the film title in white text, centered
 - Each card must have a right arrow button in the bottom right corner
 - The entire card must be clickable to trigger a GraphQL query for film data
@@ -94,7 +94,7 @@ The Studio Ghibli Film Cards application is an interactive React web application
 The application follows a card-based design pattern as illustrated in the Zeplin design mockups. Each mockup shows all four cards in different states:
 
 1. **Unloaded Card State**: All four cards in their initial unloaded state, showing film buttons in a clean, minimal layout. Each card features:
-   - Solid colored backgrounds: My Neighbor Totoro (orange), Spirited Away (red), Princess Mononoke (green), Howl's Moving Castle (purple)
+   - Solid colored backgrounds: Porco Rosso (orange), Kiki's Delivery Service (red), Howl's Moving Castle (green), My Neighbor Totoro (purple)
    - White text titles centered in each card
    - Right arrow button in the bottom right corner of each card
    - The entire card is clickable to trigger film data fetching
