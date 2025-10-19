@@ -4,7 +4,6 @@
  */
 
 
-import type { Context } from "./../../../../context"
 import type { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -44,6 +43,17 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Film: { // root type
+    description: string; // String!
+    director: string; // String!
+    id: string; // String!
+    image: string; // String!
+    movieBanner: string; // String!
+    releaseDate: string; // String!
+    rtScore: string; // String!
+    runningTime: string; // String!
+    title: string; // String!
+  }
   HelloWorld: { // root type
     message?: string | null; // String
   }
@@ -62,6 +72,17 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Film: { // field return type
+    description: string; // String!
+    director: string; // String!
+    id: string; // String!
+    image: string; // String!
+    movieBanner: string; // String!
+    releaseDate: string; // String!
+    rtScore: string; // String!
+    runningTime: string; // String!
+    title: string; // String!
+  }
   HelloWorld: { // field return type
     message: string | null; // String
   }
@@ -69,12 +90,24 @@ export interface NexusGenFieldTypes {
     placeholder: string | null; // String
   }
   Query: { // field return type
+    film: NexusGenRootTypes['Film'] | null; // Film
     helloWorld: NexusGenRootTypes['HelloWorld']; // HelloWorld!
     placeholder: string | null; // String
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Film: { // field return type name
+    description: 'String'
+    director: 'String'
+    id: 'String'
+    image: 'String'
+    movieBanner: 'String'
+    releaseDate: 'String'
+    rtScore: 'String'
+    runningTime: 'String'
+    title: 'String'
+  }
   HelloWorld: { // field return type name
     message: 'String'
   }
@@ -82,12 +115,18 @@ export interface NexusGenFieldTypeNames {
     placeholder: 'String'
   }
   Query: { // field return type name
+    film: 'Film'
     helloWorld: 'HelloWorld'
     placeholder: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
+  Query: {
+    film: { // args
+      id: string; // String!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -121,7 +160,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: Context;
+  context: any;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

@@ -13,8 +13,12 @@
 - `packages/frontend/src/styles/components/button.ts` - Button styling for film selection
 - `packages/frontend/src/hooks/useFilmData.ts` - Custom hook for managing film data fetching
 - `packages/frontend/src/hooks/useFilmData.test.ts` - Unit tests for useFilmData hook
-- `packages/backend/src/schemaModules/ghibli/queries.ghibliSchema.ts` - Backend GraphQL queries for films
-- `packages/backend/src/schemaModules/ghibli/objectTypes.ghibliSchema.ts` - GraphQL type definitions for films
+- `packages/backend/src/schemaModules/ghibli/queries.ghibliSchema.ts` - Backend GraphQL queries for films (film query with ID parameter)
+- `packages/backend/src/services/StudioGhibli/StudioGhibli.service.ts` - Service for fetching films from Studio Ghibli API
+- `packages/backend/src/services/StudioGhibli/StudioGhibli.service.unit.test.ts` - Unit tests for StudioGhibliService
+- `packages/backend/src/services/StudioGhibli/StudioGhibli.service.integration.test.ts` - Integration tests for StudioGhibliService
+- `packages/backend/src/tests/filmQueries.test.ts` - Integration tests for GraphQL film queries
+- `packages/backend/src/schemaModules/ghibli/objectTypes.ghibliSchema.ts` - GraphQL type definitions for films (Film object type with all Studio Ghibli API fields)
 
 ### Notes
 
@@ -23,13 +27,13 @@
 
 ## Tasks
 
-- [ ] 1.0 Set up server-side GraphQL queries to connect and fetch films from the Studio Ghibli API
-  - [ ] 1.1 Create GraphQL type definitions for Film objects in `objectTypes.ghibliSchema.ts`
-  - [ ] 1.2 Implement GraphQL queries to fetch individual films by ID in `queries.ghibliSchema.ts`
-  - [ ] 1.3 Generate the GraphQL schema using Nexus GraphQL
-  - [ ] 1.4 Create a new StudioGhibliService that uses the existing HttpService to handle Studio Ghibli API endpoints (https://ghibliapi.vercel.app/ - see Films documentation at https://ghibliapi.vercel.app/#tag/Films)
-  - [ ] 1.5 Add error handling for API failures and network issues
-  - [ ] 1.6 Test GraphQL queries using GraphQL Playground or similar tool
+- [x] 1.0 Set up server-side GraphQL queries to connect and fetch films from the Studio Ghibli API
+  - [x] 1.1 Create GraphQL type definitions for Film objects in `objectTypes.ghibliSchema.ts`
+  - [x] 1.2 Implement GraphQL queries to fetch individual films by ID in `queries.ghibliSchema.ts`
+  - [x] 1.3 Generate the GraphQL schema using Nexus GraphQL
+  - [x] 1.4 Create a new StudioGhibliService that uses the existing HttpService to handle Studio Ghibli API endpoints (https://ghibliapi.vercel.app/ - see Films documentation at https://ghibliapi.vercel.app/#tag/Films)
+  - [x] 1.5 Add error handling for API failures and network issues
+  - [x] 1.6 Write automated tests for GraphQL queries and ensure they pass
 - [ ] 2.0 Create the main page layout and film cards interface with responsive design for mobile
   - [ ] 2.1 Create the main Home component with light blue sky background
   - [ ] 2.2 Add primary header "Discover Studio Ghibli Films" and subheader "Select a film and hover to learn more"

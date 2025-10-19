@@ -5,6 +5,36 @@
 """Date custom scalar type"""
 scalar Date
 
+"""A Studio Ghibli film"""
+type Film {
+  """Plot description of the film"""
+  description: String!
+
+  """Director of the film"""
+  director: String!
+
+  """Unique identifier for the film"""
+  id: String!
+
+  """URL to the film poster image"""
+  image: String!
+
+  """URL to the film banner image"""
+  movieBanner: String!
+
+  """Release year of the film"""
+  releaseDate: String!
+
+  """Rotten Tomatoes score"""
+  rtScore: String!
+
+  """Runtime in minutes"""
+  runningTime: String!
+
+  """English title of the film"""
+  title: String!
+}
+
 type HelloWorld {
   message: String
 }
@@ -14,6 +44,7 @@ type Mutation {
 }
 
 type Query {
+  film(id: String!): Film
   helloWorld: HelloWorld!
   placeholder: String
 }
