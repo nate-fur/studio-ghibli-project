@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { GET_FILM } from '~/graphql/queries';
 import { useToast } from '~/shared/contexts/ToastContext';
 
@@ -68,63 +68,82 @@ export const useFilmData = () => {
     })),
   );
 
-  const [getFilm, { data, error }] = useLazyQuery<FilmData, FilmVariables>(
-    GET_FILM,
+  const [getFilm] = useLazyQuery<FilmData, FilmVariables>(GET_FILM);
+
+  const fetchFilm = useCallback(
+    async (filmId: string) => {
+      // Check if film is already loaded or currently loading
+      const film = films.find((f) => f.id === filmId);
+      if (film?.loaded || film?.loading) {
+        return; // Don't fetch if already loaded or loading
+      }
+
+      setFilms((prevFilms) =>
+        prevFilms.map((film) =>
+          film.id === filmId
+            ? {
+                ...film,
+                loading: true,
+              }
+            : film,
+        ),
+      );
+
+      try {
+        const { data, error } = await getFilm({ variables: { id: filmId } });
+
+        if (data?.film) {
+          setFilms((prevFilms) =>
+            prevFilms.map((film) =>
+              film.id === data.film.id
+                ? {
+                    ...film,
+                    data: data.film,
+                    loading: false,
+                    loaded: true,
+                  }
+                : film,
+            ),
+          );
+        }
+
+        if (error) {
+          // Mark this specific film as not loading
+          setFilms((prevFilms) =>
+            prevFilms.map((film) =>
+              film.id === filmId
+                ? {
+                    ...film,
+                    loading: false,
+                  }
+                : film,
+            ),
+          );
+
+          // Show toast notification
+          const errorMessage = error.networkError
+            ? 'Network error. Please check your connection.'
+            : error.message || 'Failed to load film data.';
+          showToast(errorMessage, 'error');
+        }
+      } catch (error) {
+        // Handle any unexpected errors
+        setFilms((prevFilms) =>
+          prevFilms.map((film) =>
+            film.id === filmId
+              ? {
+                  ...film,
+                  loading: false,
+                }
+              : film,
+          ),
+        );
+
+        showToast('An unexpected error occurred.', 'error');
+      }
+    },
+    [films, getFilm, showToast],
   );
-
-  useEffect(() => {
-    if (data?.film) {
-      setFilms((prevFilms) =>
-        prevFilms.map((film) =>
-          film.id === data.film.id
-            ? {
-                ...film,
-                data: data.film,
-                loading: false,
-                loaded: true,
-              }
-            : film,
-        ),
-      );
-    }
-  }, [data?.film]);
-
-  useEffect(() => {
-    if (error) {
-      // Find which film is currently loading and mark it as not loading
-      setFilms((prevFilms) =>
-        prevFilms.map((film) =>
-          film.loading
-            ? {
-                ...film,
-                loading: false,
-              }
-            : film,
-        ),
-      );
-
-      // Show toast notification
-      const errorMessage = error.networkError
-        ? 'Network error. Please check your connection.'
-        : error.message || 'Failed to load film data.';
-      showToast(errorMessage, 'error');
-    }
-  }, [error, showToast]);
-
-  const fetchFilm = (filmId: string) => {
-    setFilms((prevFilms) =>
-      prevFilms.map((film) =>
-        film.id === filmId
-          ? {
-              ...film,
-              loading: true,
-            }
-          : film,
-      ),
-    );
-
-    getFilm({ variables: { id: filmId } });
-  };
 
   return {
     films,

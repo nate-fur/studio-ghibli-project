@@ -47,18 +47,6 @@ const Home = () => {
     fetchFilm(filmId);
   };
 
-  const handleFilmHover = (filmTitle: string) => {
-    // TODO: Implement hover effects in subsequent sub-tasks
-    // eslint-disable-next-line no-console
-    console.log(`Hovered on ${filmTitle}`);
-  };
-
-  const handleFilmHoverEnd = (filmTitle: string) => {
-    // TODO: Implement hover end effects in subsequent sub-tasks
-    // eslint-disable-next-line no-console
-    console.log(`Stopped hovering on ${filmTitle}`);
-  };
-
   return (
     <SkyBackground>
       <HeaderContainer>
@@ -77,17 +65,8 @@ const Home = () => {
                 backgroundColor={film.backgroundColor}
                 loading={film.loading}
                 loaded={film.loaded}
-                filmData={
-                  film.data
-                    ? {
-                        image: film.data.image,
-                        title: film.data.title,
-                      }
-                    : undefined
-                }
+                filmData={film.data}
                 onClick={() => handleFilmClick(film.id)}
-                onHover={() => handleFilmHover(film.title)}
-                onHoverEnd={() => handleFilmHoverEnd(film.title)}
               />
             </Grid>
           ))}
