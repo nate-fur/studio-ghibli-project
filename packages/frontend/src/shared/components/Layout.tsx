@@ -1,11 +1,14 @@
 import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import { ToastProvider } from '~/shared/contexts/ToastContext';
 
 const Layout = () => {
   return (
-    <Box>
-      <Outlet />
-    </Box>
+    <ToastProvider>
+      <Box>
+        <Outlet />
+      </Box>
+    </ToastProvider>
   );
 };
 

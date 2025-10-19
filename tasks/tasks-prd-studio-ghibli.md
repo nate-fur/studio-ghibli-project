@@ -6,6 +6,7 @@
 - `packages/frontend/src/modules/home/Home.test.tsx` - Unit tests for Home component
 - `packages/frontend/src/graphql/queries/films.ts` - GraphQL queries for fetching film data
 - `packages/frontend/src/components/FilmCard.tsx` - Interactive film card component with event handlers and flip animation
+- `packages/frontend/src/shared/contexts/ToastContext.tsx` - Toast notification system for app-level error handling
 - `packages/frontend/src/components/FilmCard.test.tsx` - Unit tests for FilmCard component
 - `packages/frontend/src/components/LoadingSpinner.tsx` - Loading spinner component for card states
 - `packages/frontend/src/components/LoadingSpinner.test.tsx` - Unit tests for LoadingSpinner component
@@ -47,12 +48,12 @@
   - [x] 3.4 Create custom hook `useFilmData` to manage film data state
   - [x] 3.5 Connect the `useFilmData` hook to the FilmCard onClick events and pass the proper film data to each card
   - [x] 3.6 Test data fetching with the four target film IDs from the PRD
-- [ ] 4.0 Add loading states and user feedback
-  - [ ] 4.1 Create LoadingSpinner component for arrow button loading states
-  - [ ] 4.2 Add loading spinner to right arrow button when film data is being fetched (using useLazyQuery loading state)
-  - [ ] 4.3 Implement fade transition when loading completes and film data is displayed
-  - [ ] 4.4 Add error handling and user feedback for failed API calls
-  - [ ] 4.5 Test loading states with slow network simulation
+- [x] 4.0 Add loading states and user feedback
+  - [x] 4.1 Create LoadingSpinner component for arrow button loading states
+  - [x] 4.2 Add loading spinner to right arrow button when film data is being fetched (using useLazyQuery loading state)
+  - [x] 4.3 Implement fade transition when loading completes and film data is displayed
+  - [x] 4.4 Add error handling and user feedback for failed API calls
+  - [x] 4.5 Test loading states with slow network simulation
 - [ ] 5.0 Implement film card flip animations and data display
   - [ ] 5.1 Implement CSS flip animation using transforms for smooth 60fps transitions
   - [ ] 5.2 Add hover interactions for desktop (flip on hover, flip back on hover end)

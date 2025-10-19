@@ -1,6 +1,7 @@
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { GET_FILM } from '~/graphql/queries';
+import { useToast } from '~/shared/contexts/ToastContext';
 
 interface Film {
   id: string;
@@ -20,7 +21,6 @@ interface FilmCardData {
   backgroundColor: string;
   data?: Film;
   loading: boolean;
-  error?: string;
   loaded: boolean;
 }
 
@@ -59,6 +59,7 @@ const DEFAULT_FILMS: Omit<
 ];
 
 export const useFilmData = () => {
+  const { showToast } = useToast();
   const [films, setFilms] = useState<FilmCardData[]>(() =>
     DEFAULT_FILMS.map((film) => ({
       ...film,
@@ -67,11 +68,9 @@ export const useFilmData = () => {
     })),
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [getFilm, { data, loading, error }] = useLazyQuery<
-    FilmData,
-    FilmVariables
-  >(GET_FILM);
+  const [getFilm, { data, error }] = useLazyQuery<FilmData, FilmVariables>(
+    GET_FILM,
+  );
 
   useEffect(() => {
     if (data?.film) {
@@ -83,7 +82,6 @@ export const useFilmData = () => {
                 data: data.film,
                 loading: false,
                 loaded: true,
-                error: undefined,
               }
             : film,
         ),
@@ -93,20 +91,25 @@ export const useFilmData = () => {
 
   useEffect(() => {
     if (error) {
-      // Find which film is currently loading and mark it as errored
+      // Find which film is currently loading and mark it as not loading
       setFilms((prevFilms) =>
         prevFilms.map((film) =>
           film.loading
             ? {
                 ...film,
                 loading: false,
-                error: error.message,
               }
             : film,
         ),
       );
+
+      // Show toast notification
+      const errorMessage = error.networkError
+        ? 'Network error. Please check your connection.'
+        : error.message || 'Failed to load film data.';
+      showToast(errorMessage, 'error');
     }
-  }, [error]);
+  }, [error, showToast]);
 
   const fetchFilm = (filmId: string) => {
     setFilms((prevFilms) =>
@@ -115,7 +118,6 @@ export const useFilmData = () => {
           ? {
               ...film,
               loading: true,
-              error: undefined,
             }
           : film,
       ),

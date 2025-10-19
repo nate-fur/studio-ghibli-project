@@ -34,6 +34,9 @@ export const TourQueries = extendType({
         id: nonNull(stringArg()),
       },
       resolve: async (_, { id }) => {
+        // simulate network latency
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         try {
           const studioGhibliService = new StudioGhibliService();
           const film = await studioGhibliService.getFilmById(id);
