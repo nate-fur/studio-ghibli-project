@@ -1,6 +1,7 @@
 import { Box, Typography, Grid } from '@mui/material';
 import styled from '@emotion/styled';
 import FilmCard from '~/components/FilmCard';
+import { useFilmData } from '~/hooks/useFilmData';
 
 const SkyBackground = styled(Box)`
   background-image: url('/src/assets/blue_sky.png');
@@ -39,47 +40,24 @@ const CardsContainer = styled(Box)`
   margin-top: 2rem;
 `;
 
-const handleFilmClick = (filmTitle: string) => {
-  // TODO: Implement film data fetching in subsequent sub-tasks
-  // eslint-disable-next-line no-console
-  console.log(`Clicked on ${filmTitle}`);
-};
-
-const handleFilmHover = (filmTitle: string) => {
-  // TODO: Implement hover effects in subsequent sub-tasks
-  // eslint-disable-next-line no-console
-  console.log(`Hovered on ${filmTitle}`);
-};
-
-const handleFilmHoverEnd = (filmTitle: string) => {
-  // TODO: Implement hover end effects in subsequent sub-tasks
-  // eslint-disable-next-line no-console
-  console.log(`Stopped hovering on ${filmTitle}`);
-};
-
 const Home = () => {
-  const films = [
-    {
-      title: 'My Neighbor Totoro',
-      backgroundColor: '#d79a68',
-      id: '58611129-2dbc-4a81-a72f-77ddfc1b1b49',
-    },
-    {
-      title: 'Spirited Away',
-      backgroundColor: '#c24646',
-      id: '2baf70d1-42bb-443b-b751-5a8c2b26813b',
-    },
-    {
-      title: 'Princess Mononoke',
-      backgroundColor: '#279094',
-      id: '0440483e-ca0e-4120-8c50-4c8cd9b965d6',
-    },
-    {
-      title: "Howl's Moving Castle",
-      backgroundColor: '#3e6cac',
-      id: '90b72513-afd4-4570-84de-a56c312fdf81',
-    },
-  ];
+  const { films, fetchFilm } = useFilmData();
+
+  const handleFilmClick = (filmId: string) => {
+    fetchFilm(filmId);
+  };
+
+  const handleFilmHover = (filmTitle: string) => {
+    // TODO: Implement hover effects in subsequent sub-tasks
+    // eslint-disable-next-line no-console
+    console.log(`Hovered on ${filmTitle}`);
+  };
+
+  const handleFilmHoverEnd = (filmTitle: string) => {
+    // TODO: Implement hover end effects in subsequent sub-tasks
+    // eslint-disable-next-line no-console
+    console.log(`Stopped hovering on ${filmTitle}`);
+  };
 
   return (
     <SkyBackground>
@@ -97,7 +75,17 @@ const Home = () => {
               <FilmCard
                 title={film.title}
                 backgroundColor={film.backgroundColor}
-                onClick={() => handleFilmClick(film.title)}
+                loading={film.loading}
+                loaded={film.loaded}
+                filmData={
+                  film.data
+                    ? {
+                        image: film.data.image,
+                        title: film.data.title,
+                      }
+                    : undefined
+                }
+                onClick={() => handleFilmClick(film.id)}
                 onHover={() => handleFilmHover(film.title)}
                 onHoverEnd={() => handleFilmHoverEnd(film.title)}
               />

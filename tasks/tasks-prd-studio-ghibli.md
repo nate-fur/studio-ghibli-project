@@ -40,13 +40,13 @@
   - [x] 2.3 Create interactive FilmCard component with specified colors (Totoro: #d79a68, Spirited Away: #c24646, Mononoke: #279094, Howl's: #3e6cac), white text titles, right arrow buttons, and event handlers for onClick and onHover
   - [x] 2.4 Implement responsive grid layout that reorganizes into single column on mobile (< 768px)
   - [x] 2.5 Ensure proper styling and spacing matches the design mockups
-- [ ] 3.0 Set up frontend GraphQL integration and data fetching
-  - [ ] 3.1 Configure GraphQL Code Generator to generate typed hooks
-  - [ ] 3.2 Create GraphQL queries for fetching film data by ID
-  - [ ] 3.3 Set up Apollo Client with useLazyQuery for on-demand data fetching
-  - [ ] 3.4 Create custom hook `useFilmData` to manage film data state
-  - [ ] 3.5 Connect the `useFilmData` hook to the FilmCard onClick events and pass the proper film data to each card
-  - [ ] 3.6 Test data fetching with the four target film IDs from the PRD
+- [x] 3.0 Set up frontend GraphQL integration and data fetching
+  - [x] 3.1 Configure GraphQL Code Generator to generate typed hooks
+  - [x] 3.2 Create GraphQL queries for fetching film data by ID
+  - [x] 3.3 Set up Apollo Client with useLazyQuery for on-demand data fetching
+  - [x] 3.4 Create custom hook `useFilmData` to manage film data state
+  - [x] 3.5 Connect the `useFilmData` hook to the FilmCard onClick events and pass the proper film data to each card
+  - [x] 3.6 Test data fetching with the four target film IDs from the PRD
 - [ ] 4.0 Add loading states and user feedback
   - [ ] 4.1 Create LoadingSpinner component for arrow button loading states
   - [ ] 4.2 Add loading spinner to right arrow button when film data is being fetched (using useLazyQuery loading state)
