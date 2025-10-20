@@ -2,7 +2,7 @@ import { Box, Typography, IconButton, CircularProgress } from '@mui/material';
 import { East } from '@mui/icons-material';
 import styled from '@emotion/styled';
 import { useState, useRef, useEffect } from 'react';
-import { flipCardStyles } from '~/styles/components/flip-card';
+import { flipCardStyles } from '~/shared/components/FlipCard';
 
 interface Film {
   id: string;

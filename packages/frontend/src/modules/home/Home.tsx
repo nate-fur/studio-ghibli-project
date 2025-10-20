@@ -1,6 +1,6 @@
 import { Box, Typography, Grid } from '@mui/material';
 import styled from '@emotion/styled';
-import FilmCard from '~/components/FilmCard';
+import FilmCard from '~/shared/components/FilmCard';
 import { useFilmData } from '~/hooks/useFilmData';
 
 const SkyBackground = styled(Box)`
