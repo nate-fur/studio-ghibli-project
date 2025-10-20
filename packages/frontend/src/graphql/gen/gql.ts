@@ -15,10 +15,13 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
   '\n  query GetHelloWorld {\n    helloWorld {\n      message\n    }\n  }\n': typeof types.GetHelloWorldDocument;
+  '\n  query GetFilm($id: String!) {\n    film(id: $id) {\n      id\n      title\n      image\n      movieBanner\n      description\n      director\n      releaseDate\n      runningTime\n      rtScore\n    }\n  }\n': typeof types.GetFilmDocument;
 };
 const documents: Documents = {
   '\n  query GetHelloWorld {\n    helloWorld {\n      message\n    }\n  }\n':
     types.GetHelloWorldDocument,
+  '\n  query GetFilm($id: String!) {\n    film(id: $id) {\n      id\n      title\n      image\n      movieBanner\n      description\n      director\n      releaseDate\n      runningTime\n      rtScore\n    }\n  }\n':
+    types.GetFilmDocument,
 };
 
 /**
@@ -41,6 +44,12 @@ export function gql(source: string): unknown;
 export function gql(
   source: '\n  query GetHelloWorld {\n    helloWorld {\n      message\n    }\n  }\n',
 ): (typeof documents)['\n  query GetHelloWorld {\n    helloWorld {\n      message\n    }\n  }\n'];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n  query GetFilm($id: String!) {\n    film(id: $id) {\n      id\n      title\n      image\n      movieBanner\n      description\n      director\n      releaseDate\n      runningTime\n      rtScore\n    }\n  }\n',
+): (typeof documents)['\n  query GetFilm($id: String!) {\n    film(id: $id) {\n      id\n      title\n      image\n      movieBanner\n      description\n      director\n      releaseDate\n      runningTime\n      rtScore\n    }\n  }\n'];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

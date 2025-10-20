@@ -1,47 +1,78 @@
-import { useQuery } from '@apollo/client';
-import { Box, Typography, CircularProgress } from '@mui/material';
-import { GET_HELLO_WORLD } from '~/graphql/queries';
+import { Box, Typography, Grid } from '@mui/material';
+import styled from '@emotion/styled';
+import FilmCard from '~/shared/components/FilmCard';
+import { useFilmData } from '~/hooks/useFilmData';
+
+const SkyBackground = styled(Box)`
+  background-image: url('/src/assets/blue_sky.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+`;
+
+const HeaderContainer = styled(Box)`
+  text-align: center;
+  margin-bottom: 1rem;
+`;
+
+const MainHeader = styled(Typography)`
+  color: #000000;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const SubHeader = styled(Typography)`
+  color: #000000;
+  font-weight: 400;
+`;
+
+const CardsContainer = styled(Box)`
+  width: 100%;
+  max-width: 1280px;
+  margin-top: 2rem;
+`;
 
 const Home = () => {
-  const { data, loading, error } = useQuery(GET_HELLO_WORLD);
+  const { films, fetchFilm } = useFilmData();
 
-  if (loading) {
-    return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="200px"
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
-
-  if (error) {
-    return (
-      <Box padding="16px">
-        <Typography color="error">Error: {error.message}</Typography>
-      </Box>
-    );
-  }
+  const handleFilmClick = (filmId: string) => {
+    fetchFilm(filmId);
+  };
 
   return (
-    <Box
-      padding="16px"
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      minHeight="200px"
-    >
-      <Typography variant="h2" component="h1" gutterBottom>
-        {data?.helloWorld?.message || 'Hello World'}
-      </Typography>
-      <Typography variant="body1" color="textSecondary">
-        This message is fetched from the GraphQL backend!
-      </Typography>
-    </Box>
+    <SkyBackground>
+      <HeaderContainer>
+        <MainHeader variant="h2">Discover Studio Ghibli Films</MainHeader>
+        <SubHeader variant="h5">
+          {`Select a film & hover to learn more`}
+        </SubHeader>
+      </HeaderContainer>
+
+      <CardsContainer>
+        <Grid container spacing={3} justifyContent="center">
+          {films.map((film) => (
+            <Grid item xs={12} sm={6} md={3} key={film.id}>
+              <FilmCard
+                title={film.title}
+                backgroundColor={film.backgroundColor}
+                loading={film.loading}
+                loaded={film.loaded}
+                filmData={film.data}
+                onClick={() => handleFilmClick(film.id)}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </CardsContainer>
+    </SkyBackground>
   );
 };
 
